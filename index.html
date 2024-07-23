@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socket.IO Client</title>
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>Socket.IO Client</h1>
+  <button type="button" id="btn">Click me</button>
+  <button id="connectionBtn">Fetch Connection id</button>
+  <div id="connectionResponse"></div>
+  <div id="submissionResponse"></div>
+  <script>
+    const socket = io('http://localhost:3000');
+
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+
+    document.getElementById('btn').addEventListener('click', () => {
+        console.log('emitting userId');
+        socket.emit('setUserId', "312");
+    });
+
+    document.getElementById('connectionBtn').addEventListener('click', () => {
+        socket.emit('getConnectionId', "312");
+    });
+
+    socket.on('connectionId', (data) => {
+        document.getElementById('connectionResponse').innerText = data;
+    });
+
+    socket.on('submissionPayloadResponse',(data)=>{
+        document.getElementById('submissionResponse').textContent = JSON.stringify(data);
+    })
+
+    
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from server');
+    });
+
+
+  </script>
+</body>
+</html>
