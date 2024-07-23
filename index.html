@@ -11,7 +11,7 @@
   <div id="connectionResponse"></div>
   <div id="submissionResponse"></div>
   <script>
-    const socket = io('http://localhost:3000');
+    const socket = io('http://localhost:3002');
 
     socket.on('connect', () => {
       console.log('Connected to server');
@@ -19,11 +19,11 @@
 
     document.getElementById('btn').addEventListener('click', () => {
         console.log('emitting userId');
-        socket.emit('setUserId', "312");
+        socket.emit('setUserId', "1");
     });
 
     document.getElementById('connectionBtn').addEventListener('click', () => {
-        socket.emit('getConnectionId', "312");
+        socket.emit('getConnectionId', "1");
     });
 
     socket.on('connectionId', (data) => {
